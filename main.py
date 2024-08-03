@@ -139,12 +139,22 @@ def batalha(player, inimigo):
         if inimigo.hp <= 0:
             if isinstance(player, Mago):
                 player.mana += 100
+            if player.mana >= 100:
+                player.mana += 100
             if isinstance(player, Clerigo):
                 player.mana += 120
+            if player.mana >= 120:
+                player.mana = 120
             if isinstance(player, Cavaleiro):
                 player.estamina += 100
+            if player.estamina >= 100:
+                player.estamina = 100
             if isinstance(player, Samurai):
                 player.estamina += 120
+            if player.estamina >= 120:
+                player.estamina = 120
+
+
             inimigo.vivo = False
             print(f"Você derrotou {inimigo.nome}!")
             time.sleep(3)
@@ -183,6 +193,7 @@ def iniciar():
     print("Seu objetivo é chegar até um covil secreto cheio de tesouros. Para isso, você terá que enfrentar 10 inimigos que serão aleatórios (O último deles é um boss). Sua jornada começa AGORA!")
 
     time.sleep(10)
+
     # Exemplo de inicialização do sistema de batalha
     for batalha_num in range(9):
         limpar_tela()
@@ -191,12 +202,13 @@ def iniciar():
         batalha(player, inimigo)
         if not player.vivo:
             break
-    
-    andarilho = AndarilhoAbismo(nome="Andarilho do Abismo", vivo=True)
+
+        andarilho = AndarilhoAbismo(nome="Andarilho do Abismo", vivo=True)
     print(f"Batalha 10: {player.nome} enfrenta o chefe final {andarilho.nome}")
     batalha(player, andarilho)
     if andarilho.vivo == False:
         print ("Parabens você derrotou o grande Andarilho do Abismo! voce se provou um bravo guerreiro e recebeu os seus tesouros!")
+
 
 if __name__ == "__main__":
     iniciar()
